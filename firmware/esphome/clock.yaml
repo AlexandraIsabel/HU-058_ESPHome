@@ -25,6 +25,8 @@ esp32:
   board: esp32dev
   framework:
     type: arduino
+    advanced:
+      minimum_chip_revision: "3.1"
 
 external_components:
   - source:
@@ -179,6 +181,10 @@ time:
   - platform: sntp
     id: sntp_time
     timezone: !secret timezone
+    servers:
+      - time-a-g.nist.gov
+      - time-a-wwv.nist.gov
+      - time.nist.gov
 
 aip33628:
   id: panel
@@ -189,7 +195,7 @@ aip33628:
   time_id: ha_time
   # Power on defaults. The switches below own both after that, and they
   # restore their last state, so these only matter for a first ever boot.
-  twelve_hour: true
+  twelve_hour: false
   blink_colon: true
   # Ceiling on IS[3:0], 0 to 15. Fixed, never varied by content. The stock
   # firmware ran 0xF and drew 404mA doing it. Drop this if the drivers
